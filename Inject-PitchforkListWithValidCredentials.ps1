@@ -2,6 +2,8 @@
 # This works, convert it to a working cmdlet.
 # Make a cmdlet to generate IP lists.
 
+
+# Creates brute-force payload with injected valid credentials (pitchfork)
 $literalPath = 'C:\Users\rez\Downloads\passwords.txt'
 $list = Get-Content $literalPath
 
