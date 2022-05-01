@@ -2,8 +2,43 @@
 # This works, convert it to a working cmdlet.
 # Make a cmdlet to generate IP lists.
 
+# Inject-WordListWithWord
+# Expand-WordListToSize
+# Generate-WordListOfType
+# Divide-WordList
+
 
 # Creates brute-force payload with injected valid credentials (pitchfork)
+
+function Inject-WLWithWord{
+    param(
+        [string[]] $WordList,
+        [string] $WordToInject,
+        [int] $InjectionInterval
+    )
+    Process{
+        $result = @()
+        $intervalCount = 0
+
+
+        for($i = 0; $i -lt $wordList.Count; $i++){
+            if($intervalCount -eq $injectionInterval){
+                $result += $wordToInject
+                $intervalCount = 0
+            }
+
+            $result += $wordList[$i]
+            $intervalCount++
+        }
+
+        Write-Output $result
+    }
+}
+
+New-PitchforkInjectValidCreds -WordList ("abc", "123", "password", "baseball") -WordToInject "*" -InjectionInterval 1
+
+
+<#
 $literalPath = 'C:\Users\rez\Downloads\passwords.txt'
 $list = Get-Content $literalPath
 
@@ -31,4 +66,4 @@ for($i = 0; $i -lt $list.Count; $i++){
 $newUsernameList | Out-File "$($outputPath)modUsernames.txt"
 $newPasswordList | Out-File "$($outputPath)modPasswords.txt"
 
-#
+#>
