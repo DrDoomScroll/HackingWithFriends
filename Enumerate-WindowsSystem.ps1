@@ -26,4 +26,4 @@ catch [System.Exception] {
 }
 
 # Gets NTP configurtion
-W32tm /query /computer:contosoW1 /configuration > .\"$env:ComputerName.w32tm.txt
+W32tm /query /computer:localhost /configuration > .\"$env:ComputerName.w32tm.txt
